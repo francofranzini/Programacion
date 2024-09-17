@@ -7,12 +7,73 @@ def posicionMultiplo(l,n):
 def posicionMultiplo2(l,n):
     return l[::n]
 
+def ej6(lista):
+    if lista == []:
+        return []
+    lista.sort()
+    n = len(lista)
+    rta = [lista[0]]
+    for i in range(1,n):
+        if lista[i] != lista[i-1]:
+            rta.append(lista[i])
 
-for i in range(0, 10, 2):
-    print(i)
+    return rta
 
+def ej7(lista):
+    return len(ej6(lista))
 
-lista = [1,2,3,4,5,6,7]
-palabra = "MISSISSIPI"
-print (posicionMultiplo(lista, 2))
-print(posicionMultiplo2(palabra,2))
+lista = [1,2,2,2,3,3,3,4,5,6,7,7,7,8,8]
+print(ej7(lista))
+
+def BSp(lista, A):
+    if lista == []:
+        return -1
+    a = 0
+    n = len(lista)
+    b = n
+    while(b-a>1):
+        m = (b + a) //2
+        if lista[m] >= A:
+            b = m
+        else:
+            a = m
+    if b < n and lista[b] == A:
+        return b
+    return -1
+
+juanindm = ["jota", "jotelson", "json", "jbalvin", "jquery", "jijiji"]
+juanindm.sort()
+
+def chainDeRoque(chain):
+    n = len(chain) - 1
+    while n+1:
+        print(chain[n])
+        n-=1
+
+#print(BSp(juanindm, "jijiji"))
+def vocales(chain):
+    As = 0
+    Es = 0
+    Is = 0
+    Os = 0 
+    Us = 0
+    for letra in chain:
+        if letra == "a" or letra == "A":
+            As += 1
+        if letra == "E" or letra =="e":
+            Es +=1
+        if letra == "i" or letra == "I":
+            Is += 1
+        if letra == "o" or letra =="O":
+            Os += 1
+        if letra == "u" or letra == "U":
+            Us += 1
+
+    endl = "\n"
+    print(" A:", As, endl,
+          "E:", Es, endl,
+          "I:", Is, endl,
+          "O:", Os, endl,
+          "U:", Us)
+
+vocales("queremilporongaesunamilla")

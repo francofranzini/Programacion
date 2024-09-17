@@ -162,8 +162,6 @@ def ej13b(n,m):
         
     return sum
 
-
-
 def dados():
     dado = randint(1, 6)
     lista = []
@@ -178,5 +176,35 @@ def dados():
 tiradas = dados()
 print(tiradas, "\nSe lanzo", len(tiradas), "veces.")
 
-def tirarNdados()
+def BS(lista, A):
+    n = len(lista)
+    inicio = 0
+    fin = n 
+    while(fin - inicio > 1):
+        mid = (inicio + fin) // 2
+        if(lista[mid] >= A): 
+            fin = mid
+        else:
+            inicio = mid
+    if(fin < n and lista[fin] == A):
+        return fin
+    return -1
 
+
+
+print(BS([1,2,3,4,5,5,6,6,6,6,7,8,9], 7))
+
+
+
+def tirarNdados():
+    n = int(input("Ingrese la cantidad de lanzamientos: "))
+    coincidencias = 0
+    while n:
+        dado1 = randint(1,6)
+        dado2 = randint(1,6)
+        if dado1 == dado2:
+            coincidencias += 1
+        n-=1
+    return coincidencias
+
+print(tirarNdados())
