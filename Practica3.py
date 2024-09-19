@@ -23,7 +23,7 @@ def ej7(lista):
     return len(ej6(lista))
 
 lista = [1,2,2,2,3,3,3,4,5,6,7,7,7,8,8]
-print(ej7(lista))
+#print(ej7(lista))
 
 def BSp(lista, A):
     if lista == []:
@@ -76,4 +76,23 @@ def vocales(chain):
           "O:", Os, endl,
           "U:", Us)
 
-vocales("queremilporongaesunamilla")
+#vocales("queremilporongaesunamilla")
+def contarl(palabra, letra):
+    count = 0
+    for l in palabra:
+        if letra == l:
+            count += 1
+    
+    return count
+
+def cuantas_mas_5(cadena = ""):
+    contador = 0
+    pmas5 = 0
+    for letra in cadena:
+        contador += 1
+        if letra == " ":
+            contador = 0
+        if contador == 5:
+            pmas5 += 1
+    return pmas5
+print(cuantas_mas_5())

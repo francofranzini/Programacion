@@ -84,7 +84,7 @@ def appendeashei(l = []):
     l = l + ["JOTA"]
     return l
 #retorna ["JOTA"] en cada llamada, ya que no se modifica l, porque retorna una nueva lista
-#si usara un append l se modificaria pq es un metodo que modifica al l
+#si usara un append l se modificaria pq es un metodo que modifica al *l
 
 def ej8():
     k = -1
