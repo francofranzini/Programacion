@@ -5,6 +5,13 @@ def cantidadVeces(lst, e):
         return 1 + cantidadVeces(lst[1:], e)
     return cantidadVeces(lst[1:], e)
 
+def cantidadVecesRecursiva(lst, e, indice = 0):
+    if indice >= len(lst):
+        return 0
+    if lst[indice] == e:
+        return 1 + cantidadVecesRecursiva(lst, e, indice + 1)
+    return cantidadVecesRecursiva(lst, e, indice + 1)
+
 def cantidadVeces2(lst, e):
     contador = 0
     if lst == []:

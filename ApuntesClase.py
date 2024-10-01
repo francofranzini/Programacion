@@ -39,3 +39,20 @@ l = [("a", 1), ("b", 3), ("c", 5)]
 c = dict(l)
 print(c)
 print(type(d.items()))
+
+###Conjuntos
+'''
+Almacena SOLO elementos unicos INMUTABLES 
+Permite busquedas rapidas
+No es una estructura ordenada
+
+a = a & b operacion and entre conjuntos
+a = a | b operacion or entre conjuntos
+
+'''
+#Archivos
+'''
+f.read()
+fopen(./"file.txt")
+f.readlines(420)
+'''
