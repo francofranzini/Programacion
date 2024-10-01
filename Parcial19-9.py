@@ -49,5 +49,3 @@ def elementosDistintosRecursiva(lst, e):
     return elementosDistintosRecursiva(lst[1:], e)
 
 
-    
-
