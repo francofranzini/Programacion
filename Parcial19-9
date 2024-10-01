@@ -33,15 +33,14 @@ def cantidadDistintos(lst, e):
             return 1 + cantidadDistintos(lst[1:], e)
     return cantidadDistintos(lst[1:], e)
 
-def cantidadDistintos(lst, e):
+def elementosDistintosRecursiva(lst, e):
     if lst == []:
         return []
     if lst[0] != e:
         if cantidadVeces2(lst, lst[0]) == 1:
-            return [lst[0]] + cantidadDistintos(lst[1:], e)
-    return cantidadDistintos(lst[1:], e)
+            return [lst[0]] + elementosDistintosRecursiva(lst[1:], e)
+    return elementosDistintosRecursiva(lst[1:], e)
+
+
     
 
-print(elementosDistintos([1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3], 4))
-print(cantidadDistintos([1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3], 4))
-print(cantidadVeces2([1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3, 4], 4))
