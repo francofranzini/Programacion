@@ -128,3 +128,52 @@ def cadenas(c1,c2):
     pingo3 = pingo1 + pingo2
     pingo4 = set(pingo3)
     return pingo4
+
+def masLarga(frase):
+    dic = {}
+    lista_frase = frase.split()
+    n = len(lista_frase)
+    while n>0:
+        n-=1
+        for letra in lista_frase[n]:
+            if letra not in dic.keys():
+                dic[letra] = lista_frase[n]
+    return dic
+def ej7aux(lista):
+    sum = 0
+    for n in lista:
+        sum += n
+    return sum / len(lista)
+def ej7(calif,estudiante = ""):
+    if estudiante != "":
+        return ej7aux(calif[estudiante])
+    max_prom = 0
+    mas_calificado = ""
+    for e in calif.keys():
+        prom_e = ej7aux(calif[e])
+        max_prom = max(max_prom, prom_e)
+        if max_prom == prom_e:
+            mas_calificado = e
+    
+    return mas_calificado
+
+def ej8(frase, sinonimos):
+    frase_lista = frase.split()
+    frase_final = []
+    for palabra in frase_lista:
+        if palabra in sinonimos.keys():
+            x = randint(0, len(sinonimos[palabra])-1)
+            frase_final.append(sinonimos[palabra][x] + " ")
+        else:
+            frase_final.append(palabra + " ")
+    return "".join(frase_final)
+
+#print(ej8("Con alto hedor a klave", {"hedor": ["Olor"], "klave" : ["pingo", "Guimpel"]}))
+def ej9(precios, cantidades):
+    suma_total = 0
+    for item in precios.keys():
+        suma_total += precios[item] * cantidades[item]
+
+    return suma_total
+
+#print(ej9({"tussi": 450, "pala": 600, "rropo": 150}, {"tussi": 5, "pala":2, "rropo":3}))
