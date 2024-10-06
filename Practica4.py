@@ -177,3 +177,21 @@ def ej9(precios, cantidades):
     return suma_total
 
 #print(ej9({"tussi": 450, "pala": 600, "rropo": 150}, {"tussi": 5, "pala":2, "rropo":3}))
+def ej10(lista):
+    return list(set(lista))
+def ej11(c1, c2):
+    c1_lista = c1.split()
+    c2_lista = c2.split()
+    c3 = c1_lista + c2_lista
+    palabras = []
+    for p in c3:
+        palabras.append(p.lower())
+    return set(palabras)
+def ej12(conj1, conj2):
+    conj3 = conj1 & conj2
+    exclusi = []
+    for elem in conj1 | conj2:
+        if elem not in conj3:
+            exclusi.append(elem)
+    
+    return set(exclusi)

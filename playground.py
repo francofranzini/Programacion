@@ -41,7 +41,3 @@ def cantidadDistintos(lst, e):
             return [lst[0]] + cantidadDistintos(lst[1:], e)
     return cantidadDistintos(lst[1:], e)
     
-
-print(elementosDistintos([1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3], 4))
-print(cantidadDistintos([1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3], 4))
-print(cantidadVeces2([1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3, 4], 4))
