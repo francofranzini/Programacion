@@ -195,3 +195,18 @@ def ej12(conj1, conj2):
             exclusi.append(elem)
     
     return set(exclusi)
+def ej13(lista):
+    mayor = 0
+    for numero in lista:
+        mayor = max(mayor, numero)
+    listaN = [x for x in range(1, mayor) if x not in lista]
+    return listaN
+def ej13aux(lista):
+    mayor = max(lista)
+    a = set(range(1,mayor + 1))
+    return ej12(a, set(lista))
+def ej14(dias):
+    dias_disponibles = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes"}
+    for dias in dias.values():
+        dias_disponibles &= set(dias)
+    return dias_disponibles
