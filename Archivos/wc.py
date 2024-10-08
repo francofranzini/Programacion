@@ -1,10 +1,11 @@
 def data(a):
     file = open(a)
-    lineas = len(file.readlines())
+    lineas_archivo = file.readlines()
+    lineas = len(lineas_archivo)
     file.seek(0)
     caracteres = len(file.read()) - lineas
     file.seek(0)
-    palabras = sum([len(x.split()) for x in file.readlines()])
+    palabras = sum([len(x.split()) for x in lineas_archivo])
     file.close()
     return (lineas, palabras, caracteres)
 def main():
