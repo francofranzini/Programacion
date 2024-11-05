@@ -1,0 +1,23 @@
+Necesitamos una estructura que cumpla con:
+    1) Agregar Barco
+    2) Disparar
+    3) Gano/No
+
+3) Con llevar un valor en la estructura que refiera a los barcos sin hundir alcanza
+
+2)Recibimos una tupla de valores coordenados. Para el primer chequeo verificamos si las
+coordenadas son o no validas teniendo en cuenta el tamaño del tablero. Luego, en un 
+conjunto de posiciones ocupadas por barcos (conjunto de tuplas) verificamos si el tiro es,
+agua, tocado/hundido o ya disparado. Si no es agua(el tiro esta en el conjunto de posiciones ocupadas o en disparadas)
+Si esta en disparadas --> "TIRO INVALIDO"
+Si no esta en disparadas/barcos --> "AGUA"
+En otro caso, tenemos que determinar si es tocado o hundido. Para ello tenemos una lista de pares [coordenadas(conjunto), vidas(entero)]
+que representan las "vidas" restantes del barco. En caso de que se quiera disparar dos vecverifica es a la misma casilla
+sera evitado verificando si esta el tiro en "tirados". Buscamos el tiro hecho entre las coordenadas de los barcos y hecho esto, si nuestro
+tiro lleva las vidas del barco a 0 --> hundido, sino tocado. Y decrecemos en uno el valor de barcos sin hundir.
+En otro caso, "tocado".
+
+1) Agregar barco toma un par [(posiciones), vidas] y verifica por cada posicion del barco que esta sea valida considerando
+-Tamaño del tablero
+-Posicion ocupada o no
+-ADYACENCIAS: (Este caso aumenta la complejidad del codigo si verifica segun el sentido del barco)

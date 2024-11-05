@@ -1,2 +1,6 @@
 /C/a.out
 /C/a.exe
+/C/*.out
+/C/Practica1/*.out
+/C/Practica2/*.out
+/C/Practica2/*.exe
