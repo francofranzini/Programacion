@@ -7,6 +7,19 @@ int len(char* str){
     for(int i = 0; str[i] !=  '\0'; i++)l++;
     return l;
 }
+int unicos(char s[]){
+    int unicos[26], rta = 0;
+    for(int i = 0; i<26; i++) unicos[i] = 1;
+    char c;
+    for(int i = 0, x; s[i] != '\0'; i++){
+        c = s[i];
+        if(c <= 'Z') x = c - 'A';
+        else x = c - 'a';
+        rta += unicos[x];
+        unicos[x] = 0;
+    }
+    return rta;
+} 
 int es_capicua(char* str){
     int rta = 1;
     for(int i = 0, j = len(str)-1; i<j; i++, j--){
@@ -21,10 +34,10 @@ int es_pangrama(char* str){
     for(int i = 0, x; str[i] != '\0'; i++){
         c = str[i];
         if((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')){
-            if(c >= 'a' && c <= 'z') c -= 'a';
-            else c -= 'A';
-            unicas += letras[c];
-            letras[c] = 0;
+            if(c >= 'a' && c <= 'z') x = c -= 'a';
+            else x = c -= 'A';
+            unicas += letras[x];
+            letras[x] = 0;
         }
     }
     if(unicas == 26) rta = 1;
@@ -51,7 +64,7 @@ int main(){
     if(es_capicua(str)) printf("ES CAPICUA\n");
     else printf("NO ES CAPICUA\n");
     if(es_pangrama(str) ? printf("ES PANGRAMA \n") : printf("NO ES PANGRAMA \n"));
-    if(is_included("chotelsonchot", "elsota") ? printf("ESTA INCLUIDA\n") : printf("NO ESTA INCLUIDA\n"));
+    if(is_included("chotelsonchot", "elsot") ? printf("ESTA INCLUIDA\n") : printf("NO ESTA INCLUIDA\n"));
     return 0;
     
 }
