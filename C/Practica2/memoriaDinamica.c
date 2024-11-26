@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define ENDL printf("\n");
 #define forn(i,n) for(int i = 0; i<n; ++i)
 struct alumno{
@@ -29,17 +30,21 @@ int main(){
     //Si quiero hacerle resize a un espacio de memoria
     //uso la realloc:
     a = realloc(a, sizeof(int) * 20);
+
+
+    
     //19/11/2024
     struct alumno alumnos[50]; //array de 50 structs de alumno
     char temp[256];
+    struct alumno *ptr = alumnos;
     printf("Ingrese un nombre: ");scanf("%s", temp);
     alumnos[0].nombre = malloc(sizeof(char)*(strlen(temp)+1));
-    strcpy(alumno[0].nombre, temp); //toma direccion de destino y pega lo que hay en la segunda
+    strcpy(ptr->nombre, temp); //toma direccion de destino y pega lo que hay en la segunda
     //direccion
     //De esta manera guardamos solo con la memoria necesaria
+    printf("%s", alumnos[0].nombre);
     
-    
-    alumnos[0].nombre = realloc(alumnos[0].nombre, sizeof(char) * 5);
+    ptr->nombre = realloc(alumnos[0].nombre, sizeof(char) * 5);
     //alumno[0].nombre = "Facu" es correcto si el struct esta declarado con corchetes
     //pero guarda en memoria siempre 30 espacios para cada nombre.
     //alumno[0].nombre = malloc(sizeof(char*30)) pudiendo gestionar dinamicamente el 
