@@ -18,6 +18,8 @@ int main(int argc, char *argv[]) {
 
   SList lista = slist_crear();
   SList lista2 = slist_crear();
+  SList listax = slist_crear();
+  SList listay = slist_crear();
 
   lista = slist_agregar_inicio(lista, 1);
   lista = slist_agregar_inicio(lista, 2);
@@ -31,28 +33,32 @@ int main(int argc, char *argv[]) {
   SList lista_ordenada_decreciente = slist_ordenar(lista, mayor_que);
   SList lista_ordenada = slist_ordenar(lista, menor_que); 
   puts("");
-  
+  SList lista_reversa = slist_reverso(lista);
   slist_recorrer(lista_ordenada, imprimir_entero);
   puts("");
   slist_recorrer(lista_ordenada_decreciente, imprimir_entero);
-
-
-
-  lista2 = slist_agregar_inicio(lista2, 3);
-  lista2 = slist_agregar_inicio(lista2, 2);
-  lista2 = slist_agregar_inicio(lista2, 1);
-  lista2 = slist_agregar_inicio(lista2, 10);
-  
   puts("");
-  //SList lista_interseccion = slist_intersecar_2(lista, lista2, es_igual);
-  
+  slist_recorrer(lista_reversa, imprimir_entero);
+ 
+  puts("");
+
+  listax = slist_agregar_inicio(listax, 4);
+  listax = slist_agregar_inicio(listax, 3);
+  listax = slist_agregar_inicio(listax, 2);
+  listax = slist_agregar_inicio(listax, 1);
+
+  listay = slist_agregar_inicio(listay, 6);
+  listay = slist_agregar_inicio(listay, 5);
+  listay = slist_agregar_inicio(listay, 10);
   
 
+  // puts("");
+  SList lista_intercalada = slist_intercalar(listax, listay);
+  slist_recorrer(lista_intercalada, imprimir_entero);
   puts("");
-  //SList mitad = slist_partir2(lista);
-  //printf("%p", mitad);
-  //slist_recorrer(mitad, imprimir_entero);
-  //slist_destruir(lista);
+
+
+  
 
   return 0;
 }
