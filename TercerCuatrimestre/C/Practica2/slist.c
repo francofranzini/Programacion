@@ -97,23 +97,23 @@ SList slist_partir2(SList lista){
   if(lista == NULL) return NULL;
   SNodo* segunda_mitad = lista;
   int i = 0;
-  for(SNodo* it = lista; it != NULL; it = it->sig){
-    if(i == 1){
+  for(SNodo* it = lista; it->sig != NULL; it = it->sig->sig){
       segunda_mitad = segunda_mitad->sig;
-      i = 0;
     }
-    else i = 1;
-  }
-  if(i == 1) segunda_mitad = segunda_mitad->sig;
   return segunda_mitad;
-
-  
 }
+
 int slist_contiene(SList lista, int dato){
   if(lista == NULL) return 0;
   if(lista->dato == dato) return 1;
 
   return slist_contiene(lista->sig, dato);
+}
+
+int slist_contiene2(SList lista, int dato, FuncionComparacion visit){
+  if(lista == NULL) return 0;
+  if(visit(lista->dato, dato)) return 1;
+  return slist_contiene2(lista->sig, dato, visit);
 }
 int slist_indice(SList lista, int dato){
   if(lista == NULL) return 0;
@@ -121,4 +121,63 @@ int slist_indice(SList lista, int dato){
   int indice = 1 + slist_indice(lista->sig, dato);
   if(indice == slist_longitud(lista)) return -1;
   return indice;    
+}
+SList slist_intersecar(SList lista1, SList lista2){
+  if(lista2 == NULL || lista1 == NULL) return NULL;
+  if(slist_contiene(lista2, lista1->dato) == 1){
+    SNodo* nodo_interseccion = malloc(sizeof(SNodo));
+    nodo_interseccion->dato = lista1->dato;
+    nodo_interseccion->sig = slist_intersecar(lista1->sig, lista2);
+    return nodo_interseccion;
+}
+
+  return slist_intersecar(lista1->sig, lista2);
+}
+
+SList slist_intersecar_2(SList lista1, SList lista2,FuncionComparacion visit){
+  if(lista2 == NULL || lista1 == NULL) return NULL;
+  if(slist_contiene2(lista2, lista1->dato, visit)){
+    SNodo* nodo_interseccion = malloc(sizeof(SNodo));
+    nodo_interseccion->dato = lista1->dato;
+    nodo_interseccion->sig = slist_intersecar_2(lista1->sig, lista2, visit);
+    return nodo_interseccion;
+}
+
+  return slist_intersecar_2(lista1->sig, lista2, visit);
+}
+int dato_segun_comparador(SList lista, FuncionComparacion comparador, int dato_inicial){
+  if(lista == NULL) return dato_inicial;
+  if(comparador(lista->dato, dato_inicial)) dato_inicial = lista->dato;
+  return dato_segun_comparador(lista->sig, comparador, dato_inicial);
+}
+SList slist_eliminar_elemento(SList lista, int elemento){
+  if(lista == NULL) return NULL;
+  if(lista->dato == elemento){
+    return lista->sig;
+  }
+  lista->sig = slist_eliminar_elemento(lista->sig, elemento);
+  return lista;
+}
+SList slist_ordenar_aux(SList lista, FuncionComparacion comparador){
+  if(lista == NULL) return NULL;
+  SNodo* nuevo_nodo = malloc(sizeof(SNodo));
+  nuevo_nodo->dato = dato_segun_comparador(lista, comparador, lista->dato);
+  SList lista_sin = slist_eliminar_elemento(lista, nuevo_nodo->dato);
+  nuevo_nodo->sig = slist_ordenar(lista_sin, comparador);
+
+  return nuevo_nodo;
+}
+SList slist_duplicar(SList lista){
+  if(lista == NULL) return NULL;
+  SNodo* lista_nueva = malloc(sizeof(SNodo));
+  lista_nueva->dato = lista->dato;
+  lista_nueva->sig = slist_duplicar(lista->sig);
+  return lista_nueva;
+}
+SList slist_ordenar(SList lista, FuncionComparacion comparador){
+  if(lista == NULL) return NULL;
+  SList lista_nueva = slist_duplicar(lista);
+  
+  SList lista_ordenada = slist_ordenar_aux(lista_nueva, comparador);
+  return lista_ordenada;
 }

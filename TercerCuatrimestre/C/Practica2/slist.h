@@ -4,14 +4,26 @@
 #include <stddef.h>
 
 typedef void (*FuncionVisitante) (int dato);
-
 typedef struct _SNodo {
   int dato;
   struct _SNodo *sig;
 } SNodo;
+typedef int (*FuncionComparacion) (int dato1, int dato2);
+/*
+
+(nodo)[dato,sig]-->[dato, sig] --> [dato,sig] --> [dato, NULL]  
+
+a[50] = *(a + 50)
+
+*/
+
 
 typedef SNodo *SList;
-
+SList slist_intersecar_2(SList lista1, SList lista2,FuncionComparacion visit);
+SList slist_ordenar(SList lista, FuncionComparacion comparador);
+int dato_segun_comparador(SList lista, FuncionComparacion comparador, int dato_inicial);
+SList slist_intersecar(SList lista1, SList lista2);
+SList slist_eliminar_elemento(SList lista, int elemento);
 /**
  * Devuelve una lista vacía.
  */
@@ -28,7 +40,7 @@ void slist_destruir(SList lista);
  * Determina si la lista es vacía.
  */
 int slist_vacia(SList lista);
-
+int slist_contiene2(SList lista, int dato, FuncionComparacion visit);
 /**
  * Agrega un elemento al final de la lista.
  */
