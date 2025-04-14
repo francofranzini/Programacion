@@ -40,6 +40,7 @@ int contacto_comparar(Contacto *c1, Contacto *c2) {
 int contacto_mayor(Contacto* c){
   return c->edad >= 60;
 }
+
 /**
  * Función destructora de un contacto.
  */

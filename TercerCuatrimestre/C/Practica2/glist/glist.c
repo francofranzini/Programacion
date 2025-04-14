@@ -84,9 +84,9 @@ void sglist_recorrer(GList lista, FuncionVisitante visit){
   }
 }
 
-SGList sglist_insertar(SGList lista, (void*) dato, FuncionCopia c, FuncionComparadora comparadora){
+SGList sglist_insertar(SGList lista, void* dato, FuncionCopia c, FuncionComparadora comparadora){
   if(lista == NULL) return NULL;
-  if(comparadora(dato, lista->dato)){
+  if(comparadora(dato, lista->data)){
     GNode* nuevo_nodo = malloc(sizeof(GNode));
     nuevo_nodo->data = c(dato);
     nuevo_nodo->next = lista;
@@ -94,4 +94,15 @@ SGList sglist_insertar(SGList lista, (void*) dato, FuncionCopia c, FuncionCompar
   }
   lista->next = sglist_insertar(lista->next, dato,c,comparadora);
   return lista;
+}
+
+int sglist_buscar(SGList lista, void* dato, FuncionComparadora c){
+  //c(x, y) = 1 si x > y
+  //c(x, y) = 0 si x = y
+  //c(x, y) = -1 si x < y
+  if(lista == NULL) return 0;
+  int x = c(lista->data, dato);
+  if(x > 0) return 0; //Se paso
+  if(x == 0) return 1;
+  sglist_buscar(lista->next, dato, c);
 }

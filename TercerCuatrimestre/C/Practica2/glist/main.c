@@ -26,6 +26,7 @@ int main() {
   lista_filtrada = glist_filtrar(lista, (FuncionCopia)contacto_copia, (Predicado)contacto_mayor);
   glist_recorrer(lista_filtrada, (FuncionVisitante)contacto_imprimir);
   glist_destruir(lista, (FuncionDestructora)contacto_destruir);
+  glist_destruir(lista_filtrada, (FuncionDestructora) contacto_destruir);
 
   return 0;
 }

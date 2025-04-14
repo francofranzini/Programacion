@@ -5,7 +5,7 @@ typedef void (*FuncionDestructora)(void *dato);
 typedef void *(*FuncionCopia)(void *dato);
 typedef void (*FuncionVisitante)(void *dato);
 typedef int (*Predicado) (void *dato);
-typedef int (*FuncionComparadora) (void* dato, void* dato);
+typedef int (*FuncionComparadora) (void* dato1, void* dato2);
 typedef struct _GNode {
   void *data;
   struct _GNode *next;
@@ -36,7 +36,7 @@ int sglist_vacia(SGList lista);
  */
 GList glist_agregar_inicio(GList lista, void *dato, FuncionCopia copiar);
 
-SGList sglist_insertar(SGList lista, void *dato, FuncionCopia copiar, FuncionComparadora comparadora)
+SGList sglist_insertar(SGList lista, void *dato, FuncionCopia copiar, FuncionComparadora comparadora);
 /**
 Filtra segun predicado
 */

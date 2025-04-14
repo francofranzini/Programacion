@@ -109,8 +109,11 @@ int slist_contiene2(SList lista, int dato, FuncionComparacion visit){
 int slist_indice(SList lista, int dato){
   if(lista == NULL) return 0;
   if(lista->dato == dato) return 0;
+
   int indice = 1 + slist_indice(lista->sig, dato);
+  
   if(indice == slist_longitud(lista)) return -1;
+  
   return indice;    
 }
 SList slist_intersecar(SList lista1, SList lista2){
