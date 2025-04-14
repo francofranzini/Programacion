@@ -62,3 +62,36 @@ GList glist_filtrar(GList lista, FuncionCopia c, Predicado p){
   }
   glist_filtrar(lista->next, c, p);
 }
+SGList sglist_crear(){return NULL;}
+void sglist_destruir(SGList lista, FuncionDestructora d){
+  while(lista!=NULL){
+    GNode* nodo_destruir;
+    nodo_destruir = lista;
+    lista = lista->next;
+    d(nodo_destruir->data);
+    free(nodo_destruir);
+  }
+}
+
+int sglist_vacia(SGList lista){
+  return lista == NULL;
+}
+
+void sglist_recorrer(GList lista, FuncionVisitante visit){
+  while(lista!=NULL){
+    visit(lista->data);
+    lista = lista->next;
+  }
+}
+
+SGList sglist_insertar(SGList lista, (void*) dato, FuncionCopia c, FuncionComparadora comparadora){
+  if(lista == NULL) return NULL;
+  if(comparadora(dato, lista->dato)){
+    GNode* nuevo_nodo = malloc(sizeof(GNode));
+    nuevo_nodo->data = c(dato);
+    nuevo_nodo->next = lista;
+    return nuevo_nodo;
+  }
+  lista->next = sglist_insertar(lista->next, dato,c,comparadora);
+  return lista;
+}
