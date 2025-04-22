@@ -31,6 +31,7 @@ void sglist_destruir(SGList lista, FuncionDestructora d);
 int glist_vacia(GList lista);
 int sglist_vacia(SGList lista);
 
+GList glist_eliminar_inicio(GList lista);
 /**
  * Agrega un elemento al inicio de la lista.
  */
@@ -46,5 +47,6 @@ GList glist_filtrar(GList lista, FuncionCopia c, Predicado p);
  */
 void glist_recorrer(GList lista, FuncionVisitante visitar);
 void sglist_recorrer(GList lista, FuncionVisitante visit);
+
 
 #endif /* __GLIST_H__ */

@@ -19,6 +19,7 @@ void glist_destruir(GList list, FuncionDestructora destroy) {
     destroy(nodeToDelete->data);
     free(nodeToDelete);
   }
+  free(list);
 }
 
 /**
@@ -105,4 +106,11 @@ int sglist_buscar(SGList lista, void* dato, FuncionComparadora c){
   if(x > 0) return 0; //Se paso
   if(x == 0) return 1;
   sglist_buscar(lista->next, dato, c);
+}
+
+GList glist_eliminar_inicio(GList lista){
+  if(lista == NULL ) return NULL;
+  GNode* sig = lista->next;
+  free(lista);
+  return sig;
 }
