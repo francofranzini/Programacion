@@ -31,7 +31,7 @@ void sglist_destruir(SGList lista, FuncionDestructora d);
 int glist_vacia(GList lista);
 int sglist_vacia(SGList lista);
 
-GList glist_eliminar_inicio(GList lista);
+GList glist_eliminar_inicio(GList lista, FuncionDestructora d);
 /**
  * Agrega un elemento al inicio de la lista.
  */

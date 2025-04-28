@@ -11,11 +11,11 @@ void pila_destruir(Pila* pila, FuncionDestructora d);
 
 int pila_es_vacia(Pila* pila);
 
-int pila_tope(Pila* pila, FuncionVisitante v);
+void* pila_tope(Pila* pila);
 
 void pila_apilar(Pila* pila, void* dato, FuncionCopia c);
 
-void pila_desapilar(Pila* pila);
+void pila_desapilar(Pila* pila, FuncionDestructora d);
 
 void pila_imprimir(Pila* pila, FuncionVisitante v);
 

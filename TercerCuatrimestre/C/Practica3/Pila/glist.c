@@ -108,9 +108,10 @@ int sglist_buscar(SGList lista, void* dato, FuncionComparadora c){
   sglist_buscar(lista->next, dato, c);
 }
 
-GList glist_eliminar_inicio(GList lista){
+GList glist_eliminar_inicio(GList lista, FuncionDestructora d){
   if(lista == NULL ) return NULL;
   GNode* sig = lista->next;
+  d(lista->data);
   free(lista);
   return sig;
 }
