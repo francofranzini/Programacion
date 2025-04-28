@@ -43,7 +43,8 @@ int main() {
     puts("");
     cola_con_pila_imprimir(cola, (FuncionVisitante) visit);
     puts("");
-
+    cola_con_pila_destruir(cola, destruir);
+    
 
     return 0;
 }
