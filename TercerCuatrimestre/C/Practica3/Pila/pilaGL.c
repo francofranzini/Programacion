@@ -21,7 +21,8 @@ int pila_es_vacia(Pila* pila){
     return glist_vacia(pila->lista);
 }
 void* pila_tope(Pila* pila){
-   return pila->lista->data;
+  if(pila->lista == NULL) return NULL;
+  return pila->lista->data;
 }
 void pila_apilar(Pila* pila, void* dato, FuncionCopia c){
    pila->lista = glist_agregar_inicio(pila->lista, dato, c);

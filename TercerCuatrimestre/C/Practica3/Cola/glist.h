@@ -6,6 +6,8 @@ typedef void *(*FuncionCopia)(void *dato);
 typedef void (*FuncionVisitante)(void *dato);
 typedef int (*Predicado) (void *dato);
 typedef int (*FuncionComparadora) (void* dato1, void* dato2);
+
+
 typedef struct _GNode {
   void *data;
   struct _GNode *next;
