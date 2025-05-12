@@ -25,17 +25,19 @@ int main() {
     /   \
   NULL NULL
   */
-  /*
-  pre = 4 2 1 3
-  |3|
-  |4|
-  |2|
-  |1|
-  |_|
-  */
   btree_recorrer_it(raiz, BTREE_RECORRIDO_PRE_IT, imprimir_entero, (FuncionCopia) copiar_nodo,(FuncionDestructora) destruir_nodo);
   puts("");
-  btree_destruir(raiz);
+  btree_recorrer(raiz, BTREE_RECORRIDO_IN, imprimir_entero);
+  
+  puts("");
+  
+  printf("Altura: %i \n", btree_altura(raiz));
 
+  printf("Nodos en profundidad 1: %i \n", btree_nnodos_profundidad(raiz, 2));
+  
+  printf("Profundidad del \"1\": %i \n", btree_profundidad(raiz, 1));
+  
+  
+  btree_destruir(raiz);
   return 0;
 }

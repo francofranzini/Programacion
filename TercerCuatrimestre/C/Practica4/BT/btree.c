@@ -42,7 +42,9 @@ BTree btree_unir(int dato, BTree left, BTree right) {
   nuevoNodo->right = right;
   return nuevoNodo;
 }
-
+int max(int a, int b){
+  return (a > b ? a : b);
+}
 /**
  * Recorrido del arbol, utilizando la funcion pasada.
  */
@@ -99,7 +101,7 @@ int btree_nnodos(BTree arbol){
 int btree_buscar(BTree arbol, int dato){
   if(btree_empty(arbol)) return 0;
   if(arbol->dato == dato) return 1;
-  return btree_buscar(arbol->left) || btree_buscar(arbol->right);
+  return btree_buscar(arbol->left, dato) || btree_buscar(arbol->right, dato);
 }
 BTree btree_copiar(BTree arbol){
   if(btree_empty(arbol)) return NULL;
@@ -110,4 +112,55 @@ BTree btree_copiar(BTree arbol){
     nuevo_nodo->right = btree_copiar(arbol->right);
     return nuevo_nodo;
   }
+}
+int btree_altura(BTree arbol){
+  if(btree_empty(arbol)) return -1;
+  else return 1 + max(btree_altura(arbol->left), btree_altura(arbol->right));
+}
+int btree_nnodos_profundidad(BTree arbol, int k){
+  if(btree_empty(arbol)) return 0;
+  if(k == 0) return 1;
+  else return btree_nnodos_profundidad(arbol->left, k-1) + btree_nnodos_profundidad(arbol->right, k-1);
+}
+
+/*
+  Retorna la profundidad de un nodo en un arbol o -1 si no pertenece
+*/
+int btree_profundidad_aux(BTree arbol, int dato, int k){
+  if(arbol == NULL) return -1;
+  if(arbol->dato == dato) return k;
+  if(dato > arbol->dato) btree_profundidad_aux(arbol->right, dato, k+1);
+  else btree_profundidad_aux(arbol->left, dato, k+1);
+}
+int btree_profundidad(BTree arbol, int dato){
+  return btree_profundidad_aux(arbol, dato, 0);
+}
+/*
+  Retorna la suma de los nodos de un BTree
+*/
+int btree_sumar(BTree arbol){
+  if(btree_empty(arbol)) return 0;
+  return arbol->dato + btree_sumar(arbol->right) + btree_sumar(arbol->left);
+}
+void btree_recorrer_extra(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitanteExtra visita, void* extra){
+  if(btree_empty(arbol)) return;
+  if(orden == BTREE_RECORRIDO_PRE){
+    visita(arbol->dato, extra);
+  }
+  btree_recorrer_extra(arbol->left, orden, visita, extra);
+  if(orden == BTREE_RECORRIDO_IN){
+    visita(arbol->dato, extra);
+  }
+  btree_recorrer_extra(arbol->right, orden, visita, extra);
+  if(orden == BTREE_RECORRIDO_POST){
+    visita(arbol->dato, extra);
+  }
+}
+void sumador(BTree arbol, int* k){
+  (*k) += arbol->dato;
+}
+int suma_extra(BTree arbol){
+  int k = 0;
+  btree_recorrer_extra(arbol, BTREE_RECORRIDO_IN,(FuncionVisitanteExtra) sumador,&k);
+  return k;
 }

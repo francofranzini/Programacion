@@ -2,6 +2,7 @@
 #define __BTREE_H__
 
 typedef void (*FuncionVisitanteInt)(int dato);
+typedef void (*FuncionVisitanteExtra) (int dato, void *extra);
 #include "../../Practica3/Pila/pila.h"
 typedef enum {
   BTREE_RECORRIDO_IN,
@@ -40,5 +41,58 @@ void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden,
                     FuncionVisitanteInt visit);
 
 void btree_recorrer_it(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitanteInt visit, FuncionCopia c, FuncionDestructora d);
+
+/*
+  Retorna la cantidad de nodos del arbol
+*/
+int btree_nnodos(BTree arbol);
+
+/*
+  Retorna 1 si dato esta en el arbol, 0 si no
+*/
+int btree_buscar(BTree arbol, int dato);
+
+
+/*
+  Retorna una copia fisica del arbol
+*/
+BTree btree_copiar(BTree arbol);
+
+
+/*
+  Retorna la altura del arbol
+*/
+int btree_altura(BTree arbol);
+
+/*
+  Retorna la cantidad de nodos a profundidad k
+*/
+int btree_nnodos_profundidad(BTree arbol, int k);
+
+/*
+  Retorna la profundidad del nodo que contiene dato
+*/
+int btree_profundidad_aux(BTree arbol, int dato, int k);
+int btree_profundidad(BTree arbol, int dato);
+
+/*
+  Retorna la suma de los nodos de un BTree
+*/
+int btree_sumar(BTree arbol);
+/*
+  Recorre el arbol con parametro extra
+*/
+void btree_recorrer_extra(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitanteExtra visita, void* extra);
+
+/*
+  Devuelve la suma de los nodos de un arbol usando el acumulador
+*/
+int suma_extra(BTree arbol);
+void sumador(BTree arbol, int* k);
+
+/*
+  Devuelve max(a,b)
+*/
+int max(int a, int b);
 
 #endif /* __BTREE_H__ */

@@ -81,3 +81,30 @@ void bstree_recorrer(BSTree raiz, BSTreeRecorrido orden,
       visita(raiz->dato, extra);
   }
 }
+/*
+  Devuelve la cantidad de nodos en un arbol
+*/
+int bstree_nnodos(BSTree raiz){
+  if(raiz == NULL) return 0;
+  return 1 + bstree_nnodos(raiz->left) + bstree_nnodos(raiz->right);
+}
+void* bstree_k_esimo_menor_aux(BSTree raiz, int* k);{
+  if(raiz == NULL) return NULL;
+
+  void* dato;
+  dato = bstree_k_esimo_menor_aux(raiz->izq, k);
+  if(dato != NULL) return dato;
+
+  if(*k == 0) return raiz->dato;
+
+  (*k)--;
+  return bstree_k_esimo_menor_aux(raiz->der, k);
+}
+void* bstree_k_esimo_menor(BSTree raiz, int k){
+  return bstree_k_esimo_menor_aux(raiz, &k);
+  
+}
+/*
+  Retorna la altura del arbol
+*/
+
