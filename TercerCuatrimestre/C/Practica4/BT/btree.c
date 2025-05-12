@@ -92,3 +92,22 @@ void btree_recorrer_it(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitant
     }
   }
 }
+int btree_nnodos(BTree arbol){
+  if(btree_empty(arbol)) return 0;
+  return 1 + btree_nnodos(arbol->left) + btree_nnodos(arbol->right);
+}
+int btree_buscar(BTree arbol, int dato){
+  if(btree_empty(arbol)) return 0;
+  if(arbol->dato == dato) return 1;
+  return btree_buscar(arbol->left) || btree_buscar(arbol->right);
+}
+BTree btree_copiar(BTree arbol){
+  if(btree_empty(arbol)) return NULL;
+  else{
+    BTree nuevo_nodo = btree_crear();
+    nuevo_nodo->dato = arbol->dato;
+    nuevo_nodo->left = btree_copiar(arbol->left);
+    nuevo_nodo->right = btree_copiar(arbol->right);
+    return nuevo_nodo;
+  }
+}

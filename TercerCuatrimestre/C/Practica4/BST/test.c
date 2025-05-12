@@ -1,41 +1,61 @@
+#include "bstree.h"
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "btree.h"
+#include <string.h>
 
-void destruir_nodo(BTree t){
-  return;
+/**
+ * Casos de prueba para arboles de busqueda binaria generales
+ */
+
+#define N_PALABRAS 16
+
+static void *copiar_cadena(void *dato) {
+  char *str = malloc(sizeof(char) * (strlen(dato) + 1));
+  assert(str != NULL);
+  strcpy(str, dato);
+  return str;
 }
-static void imprimir_entero(int data) {
-  printf("%d ", data);
+static int comparar_cadena(void *dato1, void *dato2) {
+  return strcmp(dato1, dato2);
 }
-BTree copiar_nodo(BTree t){
-  return t;
+static void destruir_cadena(void *dato) { free(dato); }
+static void imprimir_cadena(void *dato, __attribute__((unused)) void *extra) {
+  /* __attribute__((unused)) le dice al compilador que esta variable puede no
+   * ser usada, de esta forma las banderas no tiran warnings.*/
+  printf("\"%s\" ", (char *)dato);
 }
 
 int main() {
-  BTree ll = btree_unir(1, btree_crear(), btree_crear());
-  BTree l = btree_unir(2, ll, btree_crear());
-  BTree r = btree_unir(3, btree_crear(), btree_crear());
-  BTree raiz = btree_unir(4, l, r);
-  /*         4
-           /   \
-         2       3
-       /  \     /  \
-      1   NULL NULL NULL
-    /   \
-  NULL NULL
-  */
-  /*
-  pre = 4 2 1 3
-  |3|
-  |4|
-  |2|
-  |1|
-  |_|
-  */
-  btree_recorrer_it(raiz, BTREE_RECORRIDO_PRE_IT, imprimir_entero, (FuncionCopia) copiar_nodo,(FuncionDestructora) destruir_nodo);
+
+  char *palabras[N_PALABRAS] = {"gato",      "perro",    "casa",     "persona",
+                                "parque",    "arbol",    "edificio", "calle",
+                                "argentina", "santa fe", "rosario",  "unr",
+                                "edya",      "farmacia", "tiempo",   "celular"};
+
+  // Creamos un arbol vacio y le insertamos las palabras
+  BSTree arbol = bstee_crear();
+  for (int i = 0; i < N_PALABRAS; i++)
+    arbol = bstree_insertar(arbol, palabras[i], copiar_cadena, comparar_cadena);
+
+  // Imprimir el arbol inorden (alfabetico)
+  printf("Recorrido inorden: ");
+  bstree_recorrer(arbol, BTREE_RECORRIDO_IN, imprimir_cadena, NULL);
   puts("");
-  btree_destruir(raiz);
+
+  // Buscar elementos
+  assert(bstree_buscar(arbol, "farmacia", comparar_cadena) == 1);
+  assert(bstree_buscar(arbol, "santa fe", comparar_cadena) == 1);
+  assert(bstree_buscar(arbol, "persona", comparar_cadena) == 1);
+  assert(bstree_buscar(arbol, "unr", comparar_cadena) == 1);
+  assert(bstree_buscar(arbol, "argentina", comparar_cadena) == 1);
+  assert(bstree_buscar(arbol, "telefono", comparar_cadena) == 0);
+  assert(bstree_buscar(arbol, "mail", comparar_cadena) == 0);
+  assert(bstree_buscar(arbol, "parques", comparar_cadena) == 0);
+  assert(bstree_buscar(arbol, "EDyA1", comparar_cadena) == 0);
+
+  // Destruir arbol
+  bstree_destruir(arbol, destruir_cadena);
 
   return 0;
 }
