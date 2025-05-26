@@ -164,3 +164,27 @@ int suma_extra(BTree arbol){
   btree_recorrer_extra(arbol, BTREE_RECORRIDO_IN,(FuncionVisitanteExtra) sumador,&k);
   return k;
 }
+
+void imprimir_nodos_prof(BTree arbol, FuncionVisitanteInt visit, int profundidad, int* nodos){
+  if(arbol == NULL) return;
+  if(profundidad == 0){
+    visit(arbol->dato);
+    (*nodos) = 1;
+  }
+  else{
+    imprimir_nodos_prof(arbol->left, visit, profundidad-1, nodos);
+    imprimir_nodos_prof(arbol->right, visit, profundidad-1, nodos);
+  }
+}
+
+void btree_recorrer_bfs(BTree arbol, FuncionVisitanteInt visit){
+  int i = 0;
+  int nodos = 1;
+  while(nodos){
+    nodos = 0;
+    imprimir_nodos_prof(arbol, visit, i, &nodos);
+    i++;
+  }
+  printf("\n");
+  
+}

@@ -95,4 +95,6 @@ void sumador(BTree arbol, int* k);
 */
 int max(int a, int b);
 
+void btree_recorrer_bfs(BTree arbol, FuncionVisitanteInt visit);
+
 #endif /* __BTREE_H__ */
