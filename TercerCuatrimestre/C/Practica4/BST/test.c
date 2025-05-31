@@ -34,7 +34,7 @@ int main() {
                                 "edya",      "farmacia", "tiempo",   "celular"};
 
   // Creamos un arbol vacio y le insertamos las palabras
-  BSTree arbol = bstee_crear();
+  BSTree arbol = bstree_crear();
   for (int i = 0; i < N_PALABRAS; i++)
     arbol = bstree_insertar(arbol, palabras[i], copiar_cadena, comparar_cadena);
 
@@ -42,17 +42,25 @@ int main() {
   printf("Recorrido inorden: ");
   bstree_recorrer(arbol, BTREE_RECORRIDO_IN, imprimir_cadena, NULL);
   puts("");
+  
+  char palabra_a_borrar[255];
+  strcpy(palabra_a_borrar, "argentina");
 
+  arbol = bstree_eliminar(arbol, palabra_a_borrar,(FuncionComparadora) comparar_cadena, (FuncionDestructora) destruir_cadena);
+  bstree_recorrer(arbol, BTREE_RECORRIDO_IN, imprimir_cadena, NULL);
+  puts("");
   // Buscar elementos
   assert(bstree_buscar(arbol, "farmacia", comparar_cadena) == 1);
   assert(bstree_buscar(arbol, "santa fe", comparar_cadena) == 1);
   assert(bstree_buscar(arbol, "persona", comparar_cadena) == 1);
   assert(bstree_buscar(arbol, "unr", comparar_cadena) == 1);
-  assert(bstree_buscar(arbol, "argentina", comparar_cadena) == 1);
+  //assert(bstree_buscar(arbol, palabra_a_borrar, comparar_cadena) == 1);
   assert(bstree_buscar(arbol, "telefono", comparar_cadena) == 0);
   assert(bstree_buscar(arbol, "mail", comparar_cadena) == 0);
   assert(bstree_buscar(arbol, "parques", comparar_cadena) == 0);
   assert(bstree_buscar(arbol, "EDyA1", comparar_cadena) == 0);
+  
+
 
   // Destruir arbol
   bstree_destruir(arbol, destruir_cadena);

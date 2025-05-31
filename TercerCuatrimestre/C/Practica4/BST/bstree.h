@@ -44,6 +44,10 @@ void bstree_recorrer(BSTree, BSTreeRecorrido, FuncionVisitanteExtra,
 BSTree bstree_eliminar(BSTree arbol, void *dato,
                        FuncionComparadora c, FuncionDestructora d);
 
-void* bstree_menor(BSTree arbol);
-void* bstree_mayor(BSTree arbol);
+void destruccionSimbolica(void* dato);
+
+
+
+BSTree bstree_menor(BSTree arbol);
+
 #endif //__BSTREE_H__

@@ -1,6 +1,7 @@
 #include "bstree.h"
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * Estructura del nodo del arbol de busqueda binaria.
@@ -86,9 +87,9 @@ void bstree_recorrer(BSTree raiz, BSTreeRecorrido orden,
 */
 int bstree_nnodos(BSTree raiz){
   if(raiz == NULL) return 0;
-  return 1 + bstree_nnodos(raiz->left) + bstree_nnodos(raiz->right);
+  return 1 + bstree_nnodos(raiz->izq) + bstree_nnodos(raiz->der);
 }
-void* bstree_k_esimo_menor_aux(BSTree raiz, int* k);{
+void* bstree_k_esimo_menor_aux(BSTree raiz, int* k){
   if(raiz == NULL) return NULL;
 
   void* dato;
@@ -132,25 +133,60 @@ SACAR EL 20 DEL ARBOL
             \       /
              18   27
 */
-BSTree* bstree_menor(BSTree arbol){
+BSTree bstree_menor(BSTree arbol){
   if(arbol == NULL) return NULL;
-  if(arbol->left == NULL){
-
+  if(arbol->izq == NULL){
+    return arbol;
   }
   else{
-    return arbol->dato;
+    bstree_menor(arbol->izq);
   }
 }
-
+void destruccionSimbolica(void* dato){
+  void* x = dato;
+  return;
+}
 
 
 BSTree bstree_eliminar(BSTree arbol, void *dato,FuncionComparadora c, FuncionDestructora d){
   if(arbol == NULL) return NULL;
   int comp = c(arbol->dato, dato);
-  if(comp < 0) bstree_eliminar(arbol->left, dato, c, d);
-  if(comp > 0) bstree_eliminar(arbol->right, dato, c, d);
+  if(comp > 0) arbol->izq = bstree_eliminar(arbol->izq, dato, c, d);
+  if(comp < 0) arbol->der = bstree_eliminar(arbol->der, dato, c, d);
   if(comp == 0){
-    BSTree mder = bstree_menor(arbol->right);  
+    //ES UNA HOJA
+    if(arbol->der == NULL && arbol->izq == NULL){
+      d(arbol->dato);
+      free(arbol);
+      return NULL;
+    }
+    //SOLO SUBARBOL DERECHO
+    if(arbol->izq == NULL && arbol->der != NULL){
+      BSTree aux = arbol->der;
+      d(arbol->dato);
+      free(arbol);
+      return aux;
+    } 
+    //SOLO SUBARBOL IZQUIERDO
+    if(arbol->der == NULL && arbol->izq != NULL){
+      BSTree aux = arbol->izq;
+      d(arbol->dato);
+      free(arbol);
+      return aux;
+    }
+    //  DOS SUBARBOLES :(  Necesitamos buscar el menor nodo del subarbol derecho
+    //  y ponerlo en la raiz
+
+    //Menor nodo del subarbol derecho (sin hijo izquierdo)
+    BSTree aux = bstree_menor(arbol->der);
+    d(arbol->dato);
+    arbol->dato = aux->dato; // copia simbolica
+    arbol->der = bstree_eliminar(arbol->der, aux->dato, c, destruccionSimbolica);
+    /*
+      Como sabemos que en la primer "busqueda" encontramos el menor del subarbol derecho, dicho nodo no tiene subarbol
+      izquierdo, entonces solo entrara al caso de "DOS SUBARBOLES", a lo sumo, una vez. La llamada recursiva llegara a
+      "SOLO SUBARBOL DERECHO" o a "ES UNA HOJA".
+    */
   }
   return arbol;
 
