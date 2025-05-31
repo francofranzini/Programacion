@@ -143,8 +143,7 @@ BSTree bstree_menor(BSTree arbol){
   }
 }
 void destruccionSimbolica(void* dato){
-  void* x = dato;
-  return;
+  (void)dato;
 }
 
 
