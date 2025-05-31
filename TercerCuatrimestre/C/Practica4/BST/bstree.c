@@ -16,7 +16,7 @@ struct _BST_Nodo {
 /**
  * bstee_crear: Retorna un arbol de busqueda binaria vacio
  */
-BSTree bstee_crear() { return NULL; }
+BSTree bstree_crear() { return NULL; }
 
 /**
  * bstree_destruir: Destruye el arbol y sus datos
@@ -107,4 +107,53 @@ void* bstree_k_esimo_menor(BSTree raiz, int k){
 /*
   Retorna la altura del arbol
 */
+//10, 20, 15, 25, 30, 16, 18, 19
+/*
+      10
+        \
+          20
+        /   \
+       15    25
+         \     \
+          16    30
+            \
+             18
+               \
+                19
+
+SACAR EL 20 DEL ARBOL
+10
+        \
+            1
+        /       \
+       15        25
+         \         \
+          16        30
+            \       /
+             18   27
+*/
+BSTree* bstree_menor(BSTree arbol){
+  if(arbol == NULL) return NULL;
+  if(arbol->left == NULL){
+
+  }
+  else{
+    return arbol->dato;
+  }
+}
+
+
+
+BSTree bstree_eliminar(BSTree arbol, void *dato,FuncionComparadora c, FuncionDestructora d){
+  if(arbol == NULL) return NULL;
+  int comp = c(arbol->dato, dato);
+  if(comp < 0) bstree_eliminar(arbol->left, dato, c, d);
+  if(comp > 0) bstree_eliminar(arbol->right, dato, c, d);
+  if(comp == 0){
+    BSTree mder = bstree_menor(arbol->right);  
+  }
+  return arbol;
+
+
+}
 

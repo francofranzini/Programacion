@@ -17,7 +17,7 @@ typedef struct _BST_Nodo *BSTree;
 /**
  * Retorna un arbol de busqueda binaria vacio.
  */
-BSTree bstee_crear();
+BSTree bstree_crear();
 
 /**
  * Destruye el arbol y sus datos.
@@ -41,4 +41,9 @@ BSTree bstree_insertar(BSTree, void *, FuncionCopiadora, FuncionComparadora);
 void bstree_recorrer(BSTree, BSTreeRecorrido, FuncionVisitanteExtra,
                      void *extra);
 
+BSTree bstree_eliminar(BSTree arbol, void *dato,
+                       FuncionComparadora c, FuncionDestructora d);
+
+void* bstree_menor(BSTree arbol);
+void* bstree_mayor(BSTree arbol);
 #endif //__BSTREE_H__
