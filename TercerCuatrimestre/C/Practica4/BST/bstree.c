@@ -188,7 +188,20 @@ BSTree bstree_eliminar(BSTree arbol, void *dato,FuncionComparadora c, FuncionDes
     */
   }
   return arbol;
+}
+int es_bst_util(BSTree nodo, void* min, void* max, FuncionComparadora c) {
+    if (nodo == NULL) return 1;
 
+    // Siempre que voy al subarbol izquierdo, actualizo el maximo
+    // si voy al subarbol derecho, acutalizo el minimo
+    if ((min && c(nodo->dato, min) <= 0) || (max && c(nodo->dato, max) >= 0))
+        return 0;
 
+    // Revisa recursivamente subárboles
+    return es_bst_util(nodo->izq, min, nodo->dato, c) &&
+           es_bst_util(nodo->der, nodo->dato, max, c);
 }
 
+int es_bst(BSTree raiz, FuncionComparadora c) {
+    return es_bst_util(raiz, NULL, NULL, c);
+}
