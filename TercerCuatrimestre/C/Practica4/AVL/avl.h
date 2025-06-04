@@ -46,4 +46,16 @@ int avl_validar(AVL);
  */
 void avl_recorrer(AVL, AVLRecorrido, FuncionVisitanteExtra, void *);
 
+/*
+  Dado un AVL elimina el dato
+*/
+void avl_eliminar(AVL arbol, void* dato);
+/*
+
+*/
+void eliminacionSimbolica(void* dato);
+
+/*
+  Dado un arbol retorna el minimo
+*/
 #endif /* __AVL_H__*/

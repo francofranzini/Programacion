@@ -187,7 +187,7 @@ BSTree bstree_eliminar(BSTree arbol, void *dato,FuncionComparadora c, FuncionDes
       "SOLO SUBARBOL DERECHO" o a "ES UNA HOJA".
     */
   }
-  return arbol;
+  kreturn arbol;
 }
 int es_bst_util(BSTree nodo, void* min, void* max, FuncionComparadora c) {
     if (nodo == NULL) return 1;
