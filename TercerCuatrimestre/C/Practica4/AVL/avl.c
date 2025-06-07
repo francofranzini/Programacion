@@ -316,9 +316,9 @@ AVL_Nodo* avl_nodo_eliminar(AVL_Nodo* raiz, void* dato, FuncionComparadora c, Fu
     d(raiz->dato);
     raiz->dato = avl_minimo(raiz->der);
     raiz->der = avl_nodo_eliminar(raiz->der, raiz->dato, c, eliminacionSimbolica);
-    raiz->altura = 1 + avl_nodo_max_altura_hijos(raiz);
-    raiz = avl_nodo_balancear(raiz);
   }
+  raiz->altura = 1 + avl_nodo_max_altura_hijos(raiz);
+  raiz = avl_nodo_balancear(raiz);
   return raiz;
 
 }
