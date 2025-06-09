@@ -96,9 +96,41 @@ void test_bheap_desde_array() {
     printf("All tests passed!\n");
 }
 int main() {
-    test_bheap_crear_y_vacio();
-    test_bheap_insertar_y_recorrer();
-    test_bheap_desde_array();
+    // test_bheap_crear_y_vacio();
+    // test_bheap_insertar_y_recorrer();
+    // test_bheap_desde_array();
+    // Crear un arreglo de 10000 enteros aleatorios
+    int n = 100000;
+    int* arr = malloc(sizeof(int) * n);
+    int** ptrs = malloc(sizeof(int*) * n);
+    for (int i = 0; i < n; i++) {
+        arr[i] = rand()% 10000; // Números aleatorios entre 0 y 9999
+        ptrs[i] = &arr[i];
+    }
+
+    // Crear el heap e insertar los elementos
+    BHeap h = bheap_crear(n, comparar_enteros);
+    for (int i = 0; i < n; i++) {
+        bheap_insertar(h, ptrs[i]);
+    }
+
+    // Extraer los elementos en orden y guardarlos en un nuevo arreglo
+    int* sorted = malloc(sizeof(int) * n);
+    for (int i = 0; i < n; i++) {
+        int* min = (int*)bheap_eliminar(h);
+        sorted[n-i] = *min;
+    }
+
+    // Verificar que el arreglo está ordenado
+    for (int i = 1; i < n; i++) {
+        assert(sorted[i-1] <= sorted[i]);
+    }
+    printf("Heap sort con 10000 elementos OK\n");
+
+    bheap_destruir(h);
+    free(arr);
+    free(ptrs);
+    free(sorted);
     // Puedes agregar más pruebas aquí
     return 0;
 }

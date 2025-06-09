@@ -17,7 +17,7 @@ void bheap_destruir(BHeap);
 int bheap_es_vacio(BHeap);
 void bheap_recorrer(BHeap, FuncionVisitante);
 void bheap_insertar(BHeap , void* );
-void bheap_eliminar(BHeap);
+void* bheap_eliminar(BHeap);
 
 BHeap bheap_crear_desde_arr(void **arr, int largo, FuncionCopia copiar,
 FuncionComparadora comp);

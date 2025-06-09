@@ -44,14 +44,15 @@ void bheap_insertar(BHeap bheap, void* dato){
         j /= 2;
     }
 }
-void bheap_eliminar(BHeap bheap){
+void* bheap_eliminar(BHeap bheap){
   if(!bheap_es_vacio(bheap)){
+    void* maximo = bheap->arr[1];
     bheap->arr[1] = bheap->arr[bheap->ultimo];
 
     bheap->ultimo--;
     heapify(bheap, 1, bheap->comp);
     //heapify es una funcion que conserva la invariante de heap desde un nodo hasta una hoja
-
+    return maximo;
   }
 }
 
