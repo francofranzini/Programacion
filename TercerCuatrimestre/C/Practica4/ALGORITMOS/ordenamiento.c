@@ -25,8 +25,7 @@ int* mergesort(int* a, int j,int n){
     return ret;
   }
   int m = j + (n-j)/2;
-  int *izq = malloc(sizeof(int)*(m-j));
-  int *der = malloc(sizeof(int)*(n-m));
+  int* izq, *der;
   izq = mergesort(a, j ,m);
   der = mergesort(a, m, n);
   int* merge;

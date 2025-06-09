@@ -12,8 +12,11 @@ int main(){
 
   // copy(a, b, 0, 4);
   // b = mezclar(a, c, 4, 4);
-  b = mergesort(b, 0, 7);
-  for(int i = 0; i<7; i++) printf("%d ", b[i]);
+  int *y;
+  y = mergesort(b, 0, 7);
+  for(int i = 0; i<7; i++) printf("%d ", y[i]);
+  free(b);
+  free(y);
   
 
   return 0;
