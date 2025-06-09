@@ -34,3 +34,28 @@ int* mergesort(int* a, int j,int n){
   free(der);
   return merge;
 }
+
+int particionar(int* a, int inicio, int final, int pivot){
+  int j = inicio;
+  for(int i = inicio; i<final; i++){
+    if(a[i] <= pivot){
+      int aux = a[i];
+      a[i] = a[j];
+      a[j++] = aux;
+    }
+  }
+  return j;
+}
+
+void quicksort(int* a, int inicio, int final){
+  if(final-inicio < 2) return;
+  int p = a[final-1];
+
+  int medio = particionar(a, inicio, final-1, p);
+  int aux = a[medio];
+  a[medio] = p;
+  a[final-1] = aux;
+  //a = [(...<p...), p, (...>=p...)]
+  quicksort(a, inicio, medio);
+  quicksort(a, medio+1, final);
+}
